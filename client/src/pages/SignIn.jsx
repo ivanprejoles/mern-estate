@@ -10,6 +10,7 @@ export default function SignIn() {
   const {loading, error} = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleChange = (e) => {
     setFormData(
       {
@@ -18,6 +19,7 @@ export default function SignIn() {
       }
     )
   }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -40,6 +42,7 @@ export default function SignIn() {
       dispatch(signInFailure(error.message))
     }
   }
+  
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl text-center font-semibold my-7'>Sign In</h1>
