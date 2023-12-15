@@ -48,8 +48,7 @@ export default function CreateListing() {
         "state_changed",
         (snapshot) => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(progress+'%')
-          // console.log(storage )
+          console.log(`${progress}%`);
         },
         (error) => {
           reject(error);
