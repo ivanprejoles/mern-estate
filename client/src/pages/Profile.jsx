@@ -224,15 +224,14 @@ export default function Profile() {
                   className="h-16 w-16 object-contain"
                 />
               </Link>
-              <Link 
-                to={`/listing/${listing._id}`}
-                className="text-slate-700 font-semibold flex-1 hover:underline truncate"
-              >
+              <Link to={`/listing/${listing._id}`} className="text-slate-700 font-semibold flex-1 hover:underline truncate">
                 <p>{listing.name}</p>
               </Link>
               <div className="flex flex-col item-center">
                 <button onClick={() => handleListingDelete(listing._id)} className="text-red-700 uppercase">Delete</button>
-                <button className="text-green-700 uppercase">Edit</button>
+                <Link to={`/update-listing/${listing._id}`}>
+                  <button className="text-green-700 uppercase">Edit</button>
+                </Link>
               </div>
             </div>
           ))}
