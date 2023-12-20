@@ -14,7 +14,7 @@ export default function Search() {
   });
   const [loading, setLoading] = useState(false);
   const [listings, setListings] = useState([]);
-  console.log(listings)
+  console.log(listings);
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get("searchTerm");
@@ -52,7 +52,7 @@ export default function Search() {
       const data = await res.json();
       setListings(data);
       setLoading(false);
-    }
+    };
     fetchListings();
   }, [location.search]);
 
