@@ -65,28 +65,31 @@ export const getListings = async (req, res, next) => {
         const startIndex = parseInt(req.query.startIndex) || 0;
 
         let offer = req.query.offer;
-        if (offer === undefined || offer === 'false') {
-            offer = { $in : [false, true] };
-        }
+        offer = offer === undefined || offer === 'false';
+        offer = offer ? { $in: [false, true]} : true;   
 
         let furnished = req.query.furnished;
-        if (furnished === undefined || furnished === 'false') {
-            furnished = { $in : [false, true]};
-        }
+        furnished = furnished === undefined || furnished === 'false';
+        furnished = furnished ? { $in: [false, true]} : true;
 
         let parking = req.query.parking;
-        if (parking === undefined || parking === 'false') {
-            parking = { $in : [false, true]};
-        }
+        parking = parking === undefined || parking === 'false';
+        parking = parking ? { $in: [false, true]} : true;
+
 
         let type = req.query.type;
-        if (type === undefined || type === 'all') {
+        if (type === undefined || type === 'all' || !['sale', 'rent'].includes(type)) {
             type = { $in : ['sale', 'rent']};
         }
 
         const searchTerm = req.query.searchTerm || '';
-        const sort = req.query.sort || 'createdAt';
-        const order = req.query.order || 'desc';
+
+        let sort = req.query.sort;
+        sort = ['createdAt','regularPrice'].includes(sort) ? sort : 'createdAt';
+
+        let order = req.query.order;
+        order = ['desc', 'asc'].includes(order) ? order : 'desc';
+
 
         const listings = await Listing.find({
             name : {$regex: searchTerm, $options: 'i'},
